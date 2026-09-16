@@ -67,7 +67,7 @@ class ProjectsViewModel @Inject constructor(
         _ui.update { if (initial) it.copy(loading = true, error = null) else it.copy(refreshing = true) }
         try {
             val result = coroutineScope {
-                val f = async { c.listFolders() }
+                val f = async { c.listOpenFolders() }
                 val conv = async { runCatching { c.listConversations() }.getOrDefault(emptyList()) }
                 f.await() to conv.await()
             }
